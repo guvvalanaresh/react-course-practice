@@ -15,10 +15,24 @@ module.exports = {
     },
     module: {
         rules: [
-        {
-            test: /\.css$/i,
-            use: ["style-loader", "css-loader"],
-        },
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"],
+            },
+            {
+                test: /\.(?:js|mjs|cjs)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        targets: "defaults",
+                        presets: [
+                            '@babel/preset-env',
+                            '@babel/preset-react'
+                        ]
+                    }
+                }
+            }
         ],
     },
 }
