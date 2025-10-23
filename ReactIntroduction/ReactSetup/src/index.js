@@ -1,7 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
+import "./styles.css"
 
-const heading = React.createElement("h1", {id : "title"}, "Welcome to React");
+const heading = React.createElement("h1", { id : "title", className: "container" }, "Welcome to React");
 
 const app = document.getElementById("root");
 

@@ -4,14 +4,17 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bundle": "webpack"
+    "bundle": "webpack",
+    "start": "webpack server"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "css-loader": "^7.1.2",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "style-loader": "^4.0.0"
   },
   "devDependencies": {
     "webpack-cli": "^6.0.1",

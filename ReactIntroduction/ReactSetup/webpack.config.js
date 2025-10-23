@@ -12,5 +12,13 @@ module.exports = {
             directory: path.resolve(__dirname, "public"),
         },
         port: 3000,
-    }
+    },
+    module: {
+        rules: [
+        {
+            test: /\.css$/i,
+            use: ["style-loader", "css-loader"],
+        },
+        ],
+    },
 }
