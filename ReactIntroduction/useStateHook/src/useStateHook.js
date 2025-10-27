@@ -41,13 +41,13 @@ function Counter() {
     //     // setCount(count + 1);
 
     //     //Here also it will not work as expected because of the asynchronous nature of useState.
-    //     // setCount(count + 1);
-    //     // setCount(count + 2);
+    //     // setCount(count + 1);     //Imagine it stored at the memory address of 500
+    //     // setCount(count + 2);     //It is still referring to the memory address of 500 and updating so that why it execute the last update task
     //     // setCount(count + 3);    //It is returning this because all the 3 updates are batched together and the last update is taken into consideration.
     //     // console.log("Incremented Count:", count);
 
     //     //We can avoid the above problem with this by using method which takes previous state as an argument.
-    //     setCount(count + 1);
+    //     setCount(count + 1);         //Now here the address is changing from 500,501,.. like that so you get correct answer
     //     setCount((prevCount) => {
     //         return prevCount + 1;
     //     })
