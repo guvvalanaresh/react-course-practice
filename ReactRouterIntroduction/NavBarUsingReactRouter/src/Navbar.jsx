@@ -33,6 +33,16 @@ export default function Navbar() {
             >
                 Discuss
             </NavLink>
+            <NavLink 
+                to={{
+                    pathname:'/problemset/shell',
+                    search: 'page=1'
+                }}
+                className='{activeClassName}'
+                style={({isActive}) => (isActive ? {color: 'red'} : null)}
+            >
+                Problems
+            </NavLink>
         </nav>
     );
 }

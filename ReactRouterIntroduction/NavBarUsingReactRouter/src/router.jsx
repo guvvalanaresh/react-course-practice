@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Discuss from "./pages/Discuss";
 import Details from "./pages/Details";
 import Navbar from "./Navbar";
+import ProblemSet from "./pages/ProblemSet";
 
 
 export default function AppRouter() {
@@ -36,6 +37,8 @@ export default function AppRouter() {
                     {/* instead of above routing use the below routing for the optional segment */}
                     <Route path="/profile/:userID" element={<Details />} />
                     <Route path="/profile/:userID/details" element={<Details />} />
+
+                    <Route path="/problemset/:subjectName" element={<ProblemSet />} />
                 </Routes>
             </BrowserRouter>,
         </div>
