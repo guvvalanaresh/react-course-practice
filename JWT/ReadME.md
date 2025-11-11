@@ -1,5 +1,5 @@
-JSON Web Token (JWT)
-Why Do We Need JWT?
+# JSON Web Token (JWT)
+## Why Do We Need JWT?
 Let's say we are building an API:
 
 A user logs in and gets a userId
@@ -7,71 +7,73 @@ To fetch their private data, the client sends userId in each request.
         +---------+                                +-----------+
         |  Client |                                |   Server  |
         +----+----+                                +-----+-----+
-             |                                            |
+             |                                             |
              | POST /login (username, password)            |
              |-------------------------------------------->|
-             |                                            |
+             |                                             |
              |         { "userId": 123 }                   |
              |<--------------------------------------------|
-             |                                            |
+             |                                             |
              | GET /profile?userId=123                     |
              |-------------------------------------------->|
-             |                                            |
-             |    Server uses userId=123 directly         |
-             |    Returns data of user #123               |
+             |                                             |
+             |    Server uses userId=123 directly          |
+             |    Returns data of user #123                |
              |<--------------------------------------------|
-             |                                            |
-             | GET /profile?userId=456   (tampered)         |
+             |                                             |
+             | GET /profile?userId=456   (tampered)        |
              |-------------------------------------------->|
-             |                                            |
-             |   Server trusts userId blindly             |
-             |   Leaks private data of user #456          |
+             |                                             |
+             |   Server trusts userId blindly              |
+             |   Leaks private data of user #456           |
              |<--------------------------------------------|
-             |                                            |
+             |                                             |
 
-Problem:
+### Problem:
 If the client just sends userId=123 in every request, anyone can change it to userId=456 and access another user’s data.
 
 This is a security risk because:
+        - There’s no proof that the request came from the actual user
+        - The server blindly trusts the userId sent by the client
 
-There’s no proof that the request came from the actual user
-The server blindly trusts the userId sent by the client
-The Solution — JWT
+---
+
+## The Solution — JWT
 Instead of sending raw userId, we send a signed token called JWT (JSON Web Token).
 
-How it works:
+## How it works:
 
-On login, the server creates a JWT containing:
-userId
-other claims like role, issued time, expiry time
-The server signs this JWT using a secret key
-The client stores this token
-On every request, the client sends this token
-The server verifies the token’s signature before trusting it
+        1.On login, the server creates a JWT containing:
+                - userId
+                - other claims like role, issued time, expiry time
+        2.The server signs this JWT using a secret key
+        3.The client stores this token
+        4.On every request, the client sends this token
+        The server verifies the token’s signature before trusting it
+        
 This ensures:
-
-The user cannot change their userId without breaking the signature
-The server can trust the claims inside the token
+        - The user cannot change their userId without breaking the signature
+        - The server can trust the claims inside the token
 ⚙️ JWT Request-Response Flow
         +---------+                                +-----------+
         |  Client |                                |   Server  |
         +----+----+                                +-----+-----+
-             |                                           |
+             |                                            |
              | POST /login (username, password)           |
              |------------------------------------------->|
-             |                                           |
+             |                                            |
              |            Generate JWT (signed)           |
              |<-------------------------------------------|
              |         { token: <JWT> }                   |
-             |                                           |
-             | GET /profile                              |
-             | Authorization: Bearer <JWT>               |
+             |                                            |
+             | GET /profile                               |
+             | Authorization: Bearer <JWT>                |
              |------------------------------------------->|
-             |                                           |
-             |   Verify JWT signature                    |
-             |   Return private data                     |
+             |                                            |
+             |   Verify JWT signature                     |
+             |   Return private data                      |
              |<-------------------------------------------|
-             |                                           |
+             |                                            |
 Skeleton on JWT
 <header>.<payload>.<signature>
 
