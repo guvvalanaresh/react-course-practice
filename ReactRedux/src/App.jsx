@@ -36,11 +36,24 @@ const Counter = () => {
   const decrementCount = () => {
     dispatch({ type: "dec_count" });
   }
+
+  const asyncIncrement = async () => {
+    // We can't use asynchronous functions like this this is a bad practice because we are writing directly in the react components.
+    // To use it with Redux there is a library called thunk.Here we pass async function.
+    // await new Promise((r) => setTimeout(r, 3000));
+    dispatch(async function(dispatch, getState) {
+        console.log("inside async dispatch", getState());
+        await new Promise((r) => setTimeout(r, 2000));
+        dispatch({ type: "inc_count" });
+    });
+  }
+
   return (
     <div className="box">
         <h3>Counter component</h3>
-        <button className="border border-black bg-gray-400 rounded px-2 mr-2 cursor-pointer" onClick={incrementCount}>Increment Counter</button>
-        <button className="border border-black bg-gray-400 rounded px-2 mr-2 cursor-pointer" onClick={decrementCount}>Decrement Counter</button>
+        <button className="border border-black bg-gray-400 rounded px-2 mr-2 cursor-pointer" onClick={incrementCount}>Increment Count</button>
+        <button className="border border-black bg-gray-400 rounded px-2 mr-2 cursor-pointer" onClick={decrementCount}>Decrement Count</button>
+        <button className="border border-black bg-gray-400 rounded px-2 mr-2 cursor-pointer" onClick={asyncIncrement}>Async Count</button>
     </div>
   );
 }

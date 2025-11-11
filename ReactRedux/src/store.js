@@ -1,4 +1,5 @@
-import { legacy_createStore as createStore } from 'redux';
+import { applyMiddleware, legacy_createStore as createStore } from 'redux';
+import { thunk } from 'redux-thunk';
 
 const rootReducer = (state = { age:24, count: 0 }, action) => {
     if (action.type === "inc_age") return { ...state, age: state.age + 1 };
@@ -8,7 +9,7 @@ const rootReducer = (state = { age:24, count: 0 }, action) => {
     return state;
 };
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default store;
 
