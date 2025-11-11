@@ -52,3 +52,14 @@ app.get("/profile", (req, resp) => {
 app.listen(3000, () => {
     console.log("Server running at port 3000");
 })
+
+// Authentication: Logging into the system(credentials)
+                    // Here we get error 401(unauthorized) if the credentials is wrong.
+// Authorization:  Here take example of a citizen and admin in an application
+//                  Here citizen can do some actions and admin can do some actions.
+//                  But they are not doing the same actions(so a citizen cannot do the adimin actions and a admin cannot do the citizen actions).
+//                  So,the authorized person will be response for their own actions.
+                    // Here we get 403 error if you dont have permissions to do some certain actions.
+
+                
+// We can do or achieve this authentication and authorization by using middlewares.
